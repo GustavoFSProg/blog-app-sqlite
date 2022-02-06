@@ -88,7 +88,7 @@ async function getNumber(req, res) {
   }
 }
 
-async function update(req, res) {
+async function updateLikes(req, res) {
   try {
     const { id } = req.params
 
@@ -110,4 +110,4 @@ async function update(req, res) {
   }
 }
 
-export default { register, update, getById, getAll, getNumber }
+export default { register, updateLikes, getById, getAll, getNumber }

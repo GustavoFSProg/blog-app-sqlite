@@ -1,4 +1,4 @@
-import postController from './Controllers/postController'
+import postController from './Controllers/PController'
 import { Router } from 'express'
 
 import uploadConfig from './config/uploadConfig'
@@ -18,6 +18,7 @@ const upload = multer(uploadConfig)
 const route = Router()
 
 route.get('/', postController.getAll)
+route.put('/update/:id', postController.update)
 route.get('/:number', postController.getNumber)
 route.post('/register', upload.single('image'), postController.register)
 

@@ -19,6 +19,7 @@ const route = Router()
 
 route.get('/', postController.getAll)
 route.put('/likes/:id', postController.updateLikes)
+route.put('/views/:id', postController.updateViews)
 route.get('/:number', postController.getNumber)
 route.post('/register', upload.single('image'), postController.register)
 

@@ -110,4 +110,26 @@ async function updateLikes(req, res) {
   }
 }
 
-export default { register, updateLikes, getById, getAll, getNumber }
+async function updateViews(req, res) {
+  try {
+    const { id } = req.params
+
+    const data = await prisma.posts.findFirst({
+      where: { id: id },
+    })
+
+    const user = await prisma.posts.update({
+      where: { id: id },
+      data: {
+        views: data.views + 1,
+      },
+    })
+    console.log(data.views)
+
+    return res.status(201).send({ msg: 'user created successfuly!' })
+  } catch (error) {
+    return res.status(400).json({ msg: 'ERROS!!', error })
+  }
+}
+
+export default { register, updateViews, updateLikes, getById, getAll, getNumber }

@@ -88,6 +88,21 @@ async function getNumber(req, res) {
   }
 }
 
+async function getId(req, res) {
+  try {
+    const { id } = req.params
+
+    const data = await prisma.posts.findMany({
+      where: {
+        id: id,
+      },
+    })
+    return res.status(200).send({ data })
+  } catch (error) {
+    return res.status(400).send({ message: 'DEU ERRO!' })
+  }
+}
+
 async function updateLikes(req, res) {
   try {
     const { id } = req.params
@@ -132,4 +147,4 @@ async function updateViews(req, res) {
   }
 }
 
-export default { register, updateViews, updateLikes, getById, getAll, getNumber }
+export default { register, getId, updateViews, updateLikes, getById, getAll, getNumber }

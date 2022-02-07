@@ -97,7 +97,7 @@ async function getId(req, res) {
         id: id,
       },
     })
-    return res.status(200).send(data)
+    return res.status(200).send({ data })
   } catch (error) {
     return res.status(400).send({ message: 'DEU ERRO!' })
   }

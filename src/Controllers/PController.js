@@ -26,6 +26,7 @@ async function register(req, res) {
         autor: req.body.autor,
         image: filename,
         text: req.body.text,
+        description: req.body.description,
         likes: Number(req.body.likes),
         views: Number(req.body.views),
       },

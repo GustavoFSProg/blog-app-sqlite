@@ -11,14 +11,15 @@ datasource db {
 }
 
 model Posts {
-  id        String   @id @default(uuid()) @map("_id")
-  title     String
-  image     String?
-  autor     String
-  text      String
-  likes     Int?     @default(0)
-  views     Int?     @default(0)
-  createdAt DateTime @default(now())
+  id          String   @id @default(uuid()) @map("_id")
+  title       String
+  image       String?
+  autor       String
+  text        String
+  description String   @default("Descrição")
+  likes       Int?     @default(0)
+  views       Int?     @default(0)
+  createdAt   DateTime @default(now())
 
 }
 

@@ -18,7 +18,7 @@ const upload = multer(uploadConfig)
 const route = Router()
 
 route.get('/', postController.getAll)
-route.get('/:id', postController.getById)
+route.get('/get-id/:id', postController.getById)
 route.put('/likes/:id', postController.updateLikes)
 route.put('/views/:id', postController.updateViews)
 route.get('/:number', postController.getNumber)

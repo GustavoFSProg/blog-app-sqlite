@@ -92,7 +92,7 @@ async function getId(req, res) {
   try {
     const { id } = req.params
 
-    const data = await prisma.posts.findMany({
+    const data = await prisma.posts.findFirst({
       where: {
         id: id,
       },

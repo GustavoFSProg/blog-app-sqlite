@@ -17,7 +17,7 @@ const upload = multer(uploadConfig)
 
 const route = Router()
 
-route.get('/', (res) => {
+route.get('/', (req, res) => {
   res.status(200).send({ msg: 'Api Blog version: 1.0.0' })
 })
 route.get('/pegar', postController.getAll)

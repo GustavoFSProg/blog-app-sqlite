@@ -2,29 +2,36 @@ import { PrismaClient } from '@prisma/client'
 const { promisify } = require('util')
 import fs from 'fs'
 const unlink = promisify(fs.unlink)
+var cloudinary = require('cloudinary')
 
 const prisma = new PrismaClient()
 
-/**
- * ### Description
- * This Controller function must be retrackt a produtc
- * This Controller function must be retrackt a produtc
- * This Controller function must be retrackt a produtc
- * @fucntion getAll This function must paginate the registeres
- */
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+var imagem = ''
+var resultado = ''
 
 async function register(req, res) {
   try {
-    const { filename: image } = req.file
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    })
 
-    const [name] = image.split('.')
-    const filename = `${name}.jpg`
+    cloudinary.uploader.upload(req.file.path, function (result, error) {
+      imagem = result.secure_url
+      resultado = result
+      console.log(resultado)
+    })
 
     await prisma.posts.create({
       data: {
         title: req.body.title,
         autor: req.body.autor,
-        image: filename,
+        image: imagem,
         text: req.body.text,
         description: req.body.description,
         likes: Number(req.body.likes),

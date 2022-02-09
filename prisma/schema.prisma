@@ -24,8 +24,9 @@ model Posts {
 }
 
 model Coments {
-  id        String  @id @default(uuid()) @map("_id")
+  id        String   @id @default(uuid()) @map("_id")
   post_id   String
-  coments   String
+  comments  String
   user_name String?
+  createdAt DateTime @default(now())
 }

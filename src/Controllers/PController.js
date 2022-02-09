@@ -54,7 +54,7 @@ async function getAll(req, res) {
     })
     return res.status(200).send(data)
   } catch (error) {
-    return res.status(400).send({ message: 'DEU ERRO!' })
+    return res.status(400).send({ message: 'ERROR no controller getall!' })
   }
 }
 
@@ -68,7 +68,7 @@ async function getById(req, res) {
 
     return res.status(200).json(data)
   } catch (error) {
-    return res.status(400).json(error)
+    return res.status(400).json({ message: 'ERROR no controller getaById!' })
   }
 }
 
@@ -85,7 +85,7 @@ async function getNumber(req, res) {
     })
     return res.status(200).send({ data })
   } catch (error) {
-    return res.status(400).send({ message: 'DEU ERRO!' })
+    return res.status(400).send({ message: 'ERROR no controller getNumber!' })
   }
 }
 

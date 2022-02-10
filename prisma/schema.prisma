@@ -30,3 +30,11 @@ model Coments {
   user_name String?
   createdAt DateTime @default(now())
 }
+
+model Users {
+  id       String @id @default(uuid()) @map("_id")
+  name     String
+  email    String @unique
+  password String
+  role     String
+}

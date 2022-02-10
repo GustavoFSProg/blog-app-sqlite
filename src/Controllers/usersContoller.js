@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import md5 from 'md5'
+import jwt from 'jsonwebtoken'
 
 const prisma = new PrismaClient()
 
@@ -36,4 +37,39 @@ async function getAllUsers(req, res) {
   }
 }
 
-export default { registerUser, getAllUsers }
+export async function generateToken(data) {
+  const { email, password } = data
+  return jwt.sign({ email, password }, process.env.SECRET, {
+    expiresIn: '1d',
+  })
+}
+
+async function Login(req, res) {
+  try {
+    const { email, password } = req.body
+
+    const user = await prisma.users.findFirst({
+      where: {
+        email: email,
+        password: md5(password, process.env.SECRET),
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    })
+
+    if (!user) {
+      res.status(401).send({ msg: 'Usuario não enconotrado' })
+    }
+    const token = await generateToken(user)
+
+    return res.status(200).send({ user, token })
+  } catch (error) {
+    return res.status(400).send({ error })
+  }
+}
+
+export default { registerUser, getAllUsers, Login }

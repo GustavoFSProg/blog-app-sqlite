@@ -5,9 +5,9 @@ import { Router } from 'express'
 const route = Router()
 
 const userRoutes = [
-  route.get('/user/get/all', userController.getAllUsers),
+  route.get('/user/post', userController.getAllUsers),
   route.post('/user-register', userController.registerUser),
-  route.post('/user/login', userController.Login),
+  route.post('/user/login/admin', userController.Login),
 ]
 
 export default userRoutes

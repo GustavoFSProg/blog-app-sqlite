@@ -31,4 +31,20 @@ async function getAllComents(req, res) {
   }
 }
 
-export default { registerComent, getAllComents }
+async function getOneComents(req, res) {
+  try {
+    const { id } = req.params
+
+    const data = await prisma.coments.findMany({
+      where: { post_id: id },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+    return res.status(200).send(data)
+  } catch (error) {
+    return res.status(400).send({ message: 'DEU ERRO!' })
+  }
+}
+
+export default { registerComent, getOneComents, getAllComents }

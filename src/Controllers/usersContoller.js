@@ -44,7 +44,7 @@ export async function generateToken(data) {
   })
 }
 
-async function Login(req, res) {
+async function login(req, res) {
   try {
     const { email, password } = req.body
 
@@ -72,4 +72,4 @@ async function Login(req, res) {
   }
 }
 
-export default { registerUser, getAllUsers, Login }
+export default { registerUser, getAllUsers, login }

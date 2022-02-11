@@ -25,7 +25,6 @@ async function getAllUsers(req, res) {
   try {
     const data = await prisma.users.findMany({
       select: {
-        id: true,
         name: true,
         email: true,
         role: true,
@@ -52,12 +51,6 @@ async function login(req, res) {
       where: {
         email: email,
         password: md5(password, process.env.SECRET),
-      },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
       },
     })
 

@@ -4,11 +4,7 @@ export async function isAuthorized(req, res, next) {
 
   if (!token) return res.status(401).send({ error: 'Not authorized' })
 
-  // const { error, decode } = await verifyToken(token)
-
   res.send({ msg: 'Usuario logado' })
 
-  if (error) return res.status(401).send({ error: 'Invalid token' })
-  // req.body.currentUser = await getCurrentUser(decode.email)
   return next()
 }

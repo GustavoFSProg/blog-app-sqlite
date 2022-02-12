@@ -5,6 +5,7 @@ import { Router } from 'express'
 import uploadConfig from '../config/uploadConfig'
 
 import multer from 'multer'
+import { isAuthorized } from '../config/auth'
 
 const upload = multer(uploadConfig)
 
@@ -19,7 +20,7 @@ const postarRoutes = [
   route.put('/likes/:id', postController.updateLikes),
   route.put('/views/:id', postController.updateViews),
   route.get('/:number', postController.getNumber),
-  route.post('/register', upload.single('image'), postController.register),
+  route.post('/register', isAuthorized, upload.single('image'), postController.register),
 ]
 
 export default postarRoutes

@@ -20,7 +20,7 @@ const postarRoutes = [
   route.put('/likes/:id', postController.updateLikes),
   route.put('/views/:id', postController.updateViews),
   route.get('/:number', postController.getNumber),
-  route.post('/register', isAuthorized, upload.single('image'), postController.register),
+  route.post('/register', upload.single('image'), postController.register),
 ]
 
 export default postarRoutes

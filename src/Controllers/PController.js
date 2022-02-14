@@ -118,6 +118,42 @@ async function updateLikes(req, res) {
   }
 }
 
+async function updatePosts(req, res) {
+  try {
+    const { id } = req.params
+
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    })
+
+    cloudinary.uploader.upload(req.file.path, function (result, error) {
+      imagem = result.secure_url
+      resultado = result
+      console.log(resultado)
+    })
+
+    const user = await prisma.posts.update({
+      where: { id: id },
+      data: {
+        title: req.body.title,
+        autor: req.body.autor,
+        image: imagem,
+        text: req.body.text,
+        description: req.body.description,
+        likes: Number(req.body.likes),
+        views: Number(req.body.views),
+      },
+    })
+    console.log(user)
+
+    return res.status(201).send({ msg: 'Post Editado successfuly!' })
+  } catch (error) {
+    return res.status(400).json({ msg: 'ERROS!!', error })
+  }
+}
+
 async function updateViews(req, res) {
   try {
     const { id } = req.params
@@ -140,4 +176,4 @@ async function updateViews(req, res) {
   }
 }
 
-export default { register, updateViews, updateLikes, getById, getAll, getNumber }
+export default { register, updateViews, updatePosts, updateLikes, getById, getAll, getNumber }

@@ -21,6 +21,7 @@ const postarRoutes = [
   route.put('/views/:id', postController.updateViews),
   route.put('/post-update/:id', upload.single('image'), postController.updatePosts),
   route.get('/:number', postController.getNumber),
+  route.delete('/del/:id', postController.deletePost),
   route.post('/register', upload.single('image'), postController.register),
 ]
 

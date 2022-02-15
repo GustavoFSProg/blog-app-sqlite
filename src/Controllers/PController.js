@@ -79,6 +79,20 @@ async function getById(req, res) {
   }
 }
 
+async function deletePost(req, res) {
+  try {
+    const { id } = req.params
+
+    await prisma.posts.delete({
+      where: { id: id },
+    })
+
+    return res.status(200).json({ msg: 'Post deleted!!!!' })
+  } catch (error) {
+    return res.status(400).json({ message: 'ERROR no controller deletPost!' })
+  }
+}
+
 async function getNumber(req, res) {
   try {
     const { number } = req.params
@@ -176,4 +190,13 @@ async function updateViews(req, res) {
   }
 }
 
-export default { register, updateViews, updatePosts, updateLikes, getById, getAll, getNumber }
+export default {
+  register,
+  deletePost,
+  updateViews,
+  updatePosts,
+  updateLikes,
+  getById,
+  getAll,
+  getNumber,
+}

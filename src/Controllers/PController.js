@@ -67,10 +67,10 @@ async function getAll(req, res) {
 
 async function getTwo(req, res) {
   try {
-    // const { number } = req.params
+    const { number } = req.params
 
     const data = await prisma.posts.findMany({
-      take: Number(4),
+      take: Number(number),
       // skip: 1,
 
       orderBy: {
@@ -79,7 +79,7 @@ async function getTwo(req, res) {
     })
     return res.status(200).send(data)
   } catch (error) {
-    return res.status(400).send({ message: 'ERROR no controller getall!' })
+    return res.status(400).send({ message: 'ERROR no controller getTwo!' })
   }
 }
 

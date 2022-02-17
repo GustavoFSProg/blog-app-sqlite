@@ -17,7 +17,7 @@ const postarRoutes = [
   }),
   route.get('/pegar', postController.getAll),
   route.get('/id/:id', postController.getById),
-  route.get('/dois', postController.getTwo),
+  route.get('/dois/:number', postController.getTwo),
   route.put('/likes/:id', postController.updateLikes),
   route.put('/views/:id', postController.updateViews),
   route.put('/post-update/:id', upload.single('image'), postController.updatePosts),

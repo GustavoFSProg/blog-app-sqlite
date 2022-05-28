@@ -15,23 +15,27 @@ var resultado = ''
 
 async function register(req, res) {
   try {
-    cloudinary.config({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
-    })
+    // cloudinary.config({
+    //   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    //   api_key: process.env.CLOUDINARY_API_KEY,
+    //   api_secret: process.env.CLOUDINARY_API_SECRET,
+    // })
 
-    cloudinary.uploader.upload(req.file.path, function (result, error) {
-      imagem = result.secure_url
-      resultado = result
-      console.log(resultado)
-    })
+    // cloudinary.uploader.upload(req.file.path, function (result, error) {
+
+    //   imagem = result.secure_url
+    //   resultado = result
+    //   console.log(resultado)
+    // })
+    console.log(req.file.filename)
+
+    const video = req.file.filename
 
     await prisma.posts.create({
       data: {
         title: req.body.title,
         autor: req.body.autor,
-        image: imagem,
+        image: video,
         text: req.body.text,
         description: req.body.description,
         likes: Number(req.body.likes),
